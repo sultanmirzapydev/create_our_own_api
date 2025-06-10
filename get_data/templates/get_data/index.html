@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" href="">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+            <link rel="stylesheet" href="{% static 'get_data/style.css' %}">
+            <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+ 
+  </head>
+  <body>
+    <main>
+         <form method="post" action="{% url 'do_fetch' %}">
+       {% csrf_token %}
+       <button type="submit" class=" underline">save data to model</button> 
+   </form> 
+
+
+
+   <div class="w-full bg-red-50 h-full ">
+    
+    <div class="w-full h-screen">
+      <p> Click on the button below to show the data </p>
+      
+      <form method="get" action="{% url 'do_show'  %}"> 
+       {% csrf_token %}
+       <button type="submit" style="cursor:pointer;" name="show_btn" class="c_pointer bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded ">
+        click me </button>
+        
+   </form> 
+  
+    </div>
+    
+    
+
+
+   </div>
+    </main>
+    <script src=""></script>
+  </body>
+</html>

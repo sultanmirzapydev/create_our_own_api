@@ -1,0 +1,121 @@
+{% load static %}
+ 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" href="">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+            <link rel="stylesheet" href="{% static 'get_data/style.css' %}">
+            <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+            <script>
+              // document.addEventListener('keydown', (event)=>{
+              //   if (event.key == 'ArrowRight'){
+              //     // window.scrollBy({left:0, behavior: "smooth",});
+              //   }
+              //   else if (event.key == 'ArrowLeft') {
+              //     window.scrollBy({left:0, behavior: "smooth",})
+              //   }
+              // })
+            </script>
+ 
+  </head>
+  <body>
+    <main>
+        
+
+
+   <div class=" ">
+    
+   
+      <table class="bg-red-50  " style=" border-collapse: collapse;"  cellpadding="2" cellspacing="2">
+        <caption></caption>
+        <thead class=" bg-[#0000d6] h-[80px]">
+            <tr class="">
+              {% for col in  columns %} 
+                <th scope="col " class="text-xl text-left m-[20px] pl-[20px] w-[60px]" style="color:white;
+  border-spacing: 10px 5px;   max-width: 120px;
+  min-width: 120px;"> {{col }}</th>
+                
+              {% endfor %}
+            </tr>
+        </thead>
+        <tbody class="">
+            {% for item in dataset %}
+            
+            <tr class="pt-[40px] " style="top:30px">
+           
+              
+              <td class="m-[20px] pl-[20px] p-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.egcs}}</td>
+              <td class="m-[20px] pl-[4px]" style=" max-width: 300px;
+  min-width: 300px; padding-left: 30px;" > {{item.ercs}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.erAtt|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.erInv|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.erUnq|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.erLop|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.erLmt|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{ item.ecAtt|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{ item.ecBsy|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{ item.ecCng|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{ item.ecCon|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{ item.ecMin|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{ item.ecPDD|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.ecAsr|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.ecAcd|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.erChg|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.ecChg|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.mrgn|floatformat:2}}</td>
+              <td class="m-[20px] pl-[20px]" style=" max-width: 80px;
+  min-width: 80px;"> {{item.mpct|floatformat:2}}</td>
+
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+    <div class="pagination w-screen ">
+    <span class="step-links text-center block mx-auto">
+        {% if dataset.has_previous %}
+            <a class=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" href="?page=1">&laquo; first</a>
+            <a class=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" href="?page={{ dataset.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ dataset.number }} of {{ dataset.paginator.num_pages }}.
+        </span>
+
+        {% if dataset.has_next %}
+            <a class=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" href="?page={{ dataset.next_page_number }}">next</a>
+            <a class=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" href="?page={{ dataset.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+
+    
+
+   </div>
+    </main>
+    <script src=""></script>
+  </body>
+</html>
